@@ -1,0 +1,48 @@
+#!/usr/bin/env python3
+from lxml import etree
+from sys import stdin, argv
+from chardet import detect
+html=""
+i=0
+
+def show_help():
+    helpstr="""
+xp takes data from stdin, and supplies the result of an xpath selection to stdout.
+For example (assuming xp is in your $PATH):
+
+curl -s example.com | xp '//title/text()'".format(argv[0]))
+(result should be 'Example Domain')
+
+xp with invalid args or an empty stdin will print this help message"""
+    print(helpstr)
+    exit(0)
+
+if stdin.isatty():
+    show_help()
+
+if len(argv[1:]) == 0:
+    show_help()
+
+while i < len(argv[1:]):
+    i = i + 1
+    xpr=argv[i].strip("\"\'")
+    if len(xpr) == 0 or not xpr[0] in '/(':
+        show_help()
+    else:
+        xpath=argv[i]
+
+bytelines = stdin.buffer
+for bline in bytelines:
+    #guess the encoding of the input so that I can use it
+    guess=detect(bline)
+    line=bline.decode(guess['encoding'], errors='ignore')
+    html = html + line
+
+htmlparser=etree.HTMLParser()
+tree=etree.fromstring(html, htmlparser)
+xpaths=tree.xpath(xpath)
+for xpath in xpaths:
+    if type(xpath) == etree._ElementUnicodeResult:
+        print(xpath)
+    else:
+        print(xpath.text)
