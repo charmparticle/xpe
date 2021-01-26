@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from lxml import etree
-from sys import stdin, argv
+from sys import stdin, stderr, argv
 from chardet import detect
 html=""
 i=0
@@ -35,8 +35,11 @@ bytelines = stdin.buffer
 for bline in bytelines:
     #guess the encoding of the input so that I can use it
     guess=detect(bline)
-    line=bline.decode(guess['encoding'], errors='ignore')
-    html = html + line
+    if guess['encoding'] == None:
+        pass
+    else:
+        line=bline.decode(guess['encoding'], errors='ignore')
+        html = html + line
 
 htmlparser=etree.HTMLParser()
 tree=etree.fromstring(html, htmlparser)
