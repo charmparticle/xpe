@@ -1,6 +1,6 @@
 # xpe
 
-*Finally, a commandline xpath tool for linux that doesn't suck.*
+*Finally, a commandline xpath tool for linux that can actually handle real html.*
 
 ***What is this?***
 
