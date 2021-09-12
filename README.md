@@ -22,3 +22,6 @@ The order doesn't matter, so the following is also valid:
 
     sudo pip3 install xpe
 
+***How to upgrade***
+
+    sudo pip3 install -U xpe
