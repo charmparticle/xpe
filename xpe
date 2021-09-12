@@ -22,7 +22,7 @@ xp somefile.html '//a/@href'
 
 xp will print this help message if it is invoked improperly"""
     print(helpstr)
-    exit(0)
+    exit(1)
 
 if stdin.isatty():
     target='file'
