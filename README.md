@@ -6,7 +6,7 @@
 
 xpe is a commandline xpath parser. Pipe in some textual data, supply it with an xpath expression, and it will dump the result to stdout. Perfect for shellscripting. For example:
     
-    curl -sL example.com | xpe "//h1/text()"
+    curl example.com | xpe "//h1/text()"
 
     GitHub: Where the world builds software
     
