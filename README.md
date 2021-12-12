@@ -8,7 +8,7 @@ xpe is a commandline xpath parser. Pipe in some textual data, supply it with an 
     
     curl example.com | xpe "//h1/text()"
 
-    GitHub: Where the world builds software
+    Example Domain
     
 Alternatively, xpe can query a file for xpath expressions like so:
 
