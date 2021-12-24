@@ -44,10 +44,11 @@ if stdin.isatty():
 
 else:
     target = 'stdin'
+
     if len(argv[1:]) == 0:
         show_help()
-    else:
-        xpath = argv[1]
+
+    xpath = argv[1]
 
 xpr = xpath.strip("\"\'")
 if len(xpr) == 0 or not xpr[0] in '/(':
