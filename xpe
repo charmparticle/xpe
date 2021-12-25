@@ -58,8 +58,7 @@ if len(xpr) == 0 or not xpr[0] in '/(':
 if target == 'stdin':
     bytelines = stdin.buffer
 else:
-    f = open(target, 'rb')
-    bytelines = list(f)
+    bytelines = open(target, 'rb')
 
 for bline in bytelines:
     if i == 0:
@@ -78,6 +77,8 @@ for bline in bytelines:
         html = html + line
 
     i = i + 1
+
+bytelines.close()
 
 htmlparser = etree.HTMLParser()
 tree = etree.fromstring(html, htmlparser)
