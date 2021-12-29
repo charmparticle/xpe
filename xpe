@@ -1,13 +1,18 @@
 #!/usr/bin/env python3
-from lxml import etree
-from sys import stdin, stderr, argv
+
+from sys import stdin, argv
 from os import path
+
+from lxml import etree
 from chardet import detect
-html=""
-i=0
+
+
+html = ""
+i = 0
+
 
 def show_help():
-    helpstr="""
+    helpstr = """
 xp takes data from stdin, and supplies the result of an xpath selection to stdout.
 For example (assuming xp is in your $PATH):
 
@@ -24,26 +29,27 @@ xp will print this help message if it is invoked improperly"""
     print(helpstr)
     exit(1)
 
+
 if stdin.isatty():
-    target='file'
+    target = 'file'
     if len(argv[1:]) == 2:
-        for n in range(1,3):
-            arg=argv[n]
+        for n in range(1, 3):
+            arg = argv[n]
             if path.exists(path.expanduser(arg)):
-                target=path.expanduser(arg)
+                target = path.expanduser(arg)
             else:
-                xpath=arg
+                xpath = arg
     else:
         show_help()
 
 else:
-    target='stdin'
+    target = 'stdin'
     if len(argv[1:]) == 0:
         show_help()
     else:
-        xpath=argv[1]
+        xpath = argv[1]
 
-xpr=xpath.strip("\"\'")
+xpr = xpath.strip("\"\'")
 if len(xpr) == 0 or not xpr[0] in '/(':
     show_help()
 
@@ -63,20 +69,22 @@ for bline in bytelines:
                 continue
         except Exception:
             pass
-    #guess the encoding of the input so that I can use it
-    guess=detect(bline)
-    if guess['encoding'] == None:
+
+    # guess the encoding of the input so that I can use it
+    guess = detect(bline)
+    if guess['encoding'] is None:
         pass
     else:
-        line=bline.decode(guess['encoding'], errors='ignore')
+        line = bline.decode(guess['encoding'], errors='ignore')
         html = html + line
-    i+=1
 
-htmlparser=etree.HTMLParser()
-tree=etree.fromstring(html, htmlparser)
+    i = i + 1
+
+htmlparser = etree.HTMLParser()
+tree = etree.fromstring(html, htmlparser)
 
 try:
-    xpaths=tree.xpath(xpath)
+    xpaths = tree.xpath(xpath)
 except etree.XPathEvalError:
     show_help()
 
