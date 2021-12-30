@@ -32,6 +32,7 @@ xp will print this help message if it is invoked improperly"""
 
 if stdin.isatty():
     target = 'file'
+
     if len(argv[1:]) == 2:
         for n in range(1, 3):
             arg = argv[n]
@@ -39,15 +40,16 @@ if stdin.isatty():
                 target = path.expanduser(arg)
             else:
                 xpath = arg
-    else:
-        show_help()
 
+    if target == 'file':
+        show_help()
 else:
     target = 'stdin'
+
     if len(argv[1:]) == 0:
         show_help()
-    else:
-        xpath = argv[1]
+
+    xpath = argv[1]
 
 xpr = xpath.strip("\"\'")
 if len(xpr) == 0 or not xpr[0] in '/(':
@@ -56,11 +58,7 @@ if len(xpr) == 0 or not xpr[0] in '/(':
 if target == 'stdin':
     bytelines = stdin.buffer
 else:
-    if target == 'file':
-        show_help()
-    else:
-        f = open(target, 'rb')
-        bytelines = list(f)
+    bytelines = open(target, 'rb')
 
 for bline in bytelines:
     if i == 0:
@@ -79,6 +77,8 @@ for bline in bytelines:
         html = html + line
 
     i = i + 1
+
+bytelines.close()
 
 htmlparser = etree.HTMLParser()
 tree = etree.fromstring(html, htmlparser)
