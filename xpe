@@ -13,19 +13,19 @@ i = 0
 
 def show_help():
     helpstr = """
-xp takes data from stdin, and supplies the result of an xpath selection to stdout.
-For example (assuming xp is in your $PATH):
+xpe takes data from stdin, and supplies the result of an xpath selection to stdout.
+For example (assuming xpe is in your $PATH):
 
-curl -s example.com | xp '//title/text()'
+curl -s example.com | xpe '//title/text()'
 (result should be 'Example Domain')
 
-Alternatively, xp can read a file supplied to it, ie:
+Alternatively, xpe can read a file supplied to it, ie:
 
-xp '//a/@href' somefile.html
+xpe '//a/@href' somefile.html
 or
-xp somefile.html '//a/@href'
+xpe somefile.html '//a/@href'
 
-xp will print this help message if it is invoked improperly"""
+xpe will print this help message if it is invoked improperly"""
     print(helpstr)
     exit(1)
 
