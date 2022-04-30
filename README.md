@@ -1,6 +1,6 @@
 # xpe
 
-*Finally, a commandline xpath tool for linux that is easy to use.*
+*Finally, a commandline xpath tool that is easy to use.*
 
 ***What is this?***
 
