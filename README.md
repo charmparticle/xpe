@@ -18,6 +18,9 @@ The order doesn't matter, so the following is also valid:
 
     xpe somefile.htm '//a/@href'
 
+**Lately, I've been using xidel instead because it is faster. I created a gist for how to get xidel to act like xpe**
+
+https://gist.github.com/charmparticle/3253f75880d8daf546e5fb2dd4437213
 ***How to install***
 
     sudo pip3 install xpe
